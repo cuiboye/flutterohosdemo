@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boost/flutter_boost.dart';
+import 'package:fluttermoduledemo/utils/vpn_with_webview_utils.dart';
 
 class FlutterIndexRoute extends StatefulWidget {
   const FlutterIndexRoute({this.params, this.message, this.uniqueId});
@@ -22,6 +22,16 @@ class _FlutterIndexRouteState extends State<FlutterIndexRoute>
   void initState() {
     super.initState();
     Logger.log('$_kTag#initState, ${widget.uniqueId}, $this');
+
+    WidgetsBinding.instance.addPostFrameCallback((callback) {
+      //注意：context需要传递进去，否则会有问题
+      VPNWithWebviewUtils.showMainPrivacyDialog(
+        context, "", (BuildContext context)=>argementPrivacy(),);
+    });
+  }
+
+  argementPrivacy(){
+    debugPrint('argementPrivacy');
   }
 
   @override
@@ -91,6 +101,18 @@ class _FlutterIndexRouteState extends State<FlutterIndexRoute>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              InkWell(
+                child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    margin: const EdgeInsets.all(8.0),
+                    color: Colors.yellow,
+                    child: const Text(
+                      '打开Dialog弹框',
+                      style: TextStyle(fontSize: 22.0, color: Colors.blue),
+                    )),
+                onTap: () =>
+                    Navigator.of(context).pop({'msg': 'I am from dart ...'}),
+              ),
               InkWell(
                 child: Container(
                     padding: const EdgeInsets.all(8.0),
