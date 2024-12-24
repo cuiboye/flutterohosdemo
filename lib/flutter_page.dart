@@ -111,7 +111,8 @@ class _FlutterIndexRouteState extends State<FlutterIndexRoute>
                       style: TextStyle(fontSize: 22.0, color: Colors.blue),
                     )),
                 onTap: () =>
-                    Navigator.of(context).pop({'msg': 'I am from dart ...'}),
+                    VPNWithWebviewUtils.showMainPrivacyDialog(
+                      context, "", (BuildContext context)=>argementPrivacy(),),
               ),
               InkWell(
                 child: Container(
@@ -123,7 +124,9 @@ class _FlutterIndexRouteState extends State<FlutterIndexRoute>
                       style: TextStyle(fontSize: 22.0, color: Colors.blue),
                     )),
                 onTap: () =>
-                    Navigator.of(context).pop({'msg': 'I am from dart ...'}),
+                    // TODO 这个返回有问题，看是否可以通过原生来实现返回，物理返回没有问题
+                    BoostNavigator.instance.pop()
+                    // Navigator.of(context).pop({'msg': 'I am from dart ...'}),
               ),
               InkWell(
                 child: Container(

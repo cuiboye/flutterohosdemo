@@ -138,9 +138,18 @@ class _MyAppState extends State<MyApp> {
     return FlutterBoostApp(routeFactory,
         // 如果自定了appBuilder，需要将传入的参数添加到widget层次结构中去，
         // 否则会导致FluttBoost初始化失败。
-        appBuilder: (child) => MaterialApp(
-              home: child,
-            ),
+        // appBuilder: (child) => MaterialApp(
+        //       home: child,
+        //     ),
+        appBuilder: (child) =>MaterialApp(
+          home: child,
+          debugShowCheckedModeBanner: true,
+          ///必须加上builder参数，否则showDialog等会出问题
+          builder: (_, __) {
+            return child;
+          },
+        ),
+
         interceptors: [
           CustomInterceptor1(),
           CustomInterceptor2(),
